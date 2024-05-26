@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolo de Aniversário</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            cursor: pointer;
+        }
+        .container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+        }
+        .bolo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #confetes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
+        #mensagem {
+            font-size: 2em;
+            color: blue;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .confete {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: cair 2s linear infinite;
+        }
+        @keyframes cair {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(400px);
+                opacity: 0;
+            }
+        }
+        img {
+            border: solid 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mensagem">Feliz Aniversário!</div>
+    <div class="container" onclick="apagarVela()">
+        <img src="https://abre.ai/jR5b"  class="bolo" id="velaAcesa">
+        <img src="https://abre.ai/jR4W"  class="bolo" id="velaApagada" style="display: none;">
+        <div id="confetes"></div>
+    </div>
+
+    <script>
+        function apagarVela() {
+            document.getElementById('velaAcesa').style.display = 'none';
+            document.getElementById('velaApagada').style.display = 'block';
+            document.getElementById('mensagem').style.display = 'block';
+            mostrarConfetes();
+        }
+
+        function mostrarConfetes() {
+            const confetesContainer = document.getElementById('confetes');
+            confetesContainer.style.display = 'block';
+            for (let i = 0; i < 100; i++) {
+                const confete = document.createElement('div');
+                confete.className = 'confete';
+                confete.style.left = Math.random() * 100 + 'px';
+                confete.style.top = Math.random() * 100 + 'px';
+                confete.style.backgroundColor = getRandomColor();
+                confetesContainer.appendChild(confete);
+            }
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
